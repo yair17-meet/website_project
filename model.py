@@ -12,18 +12,23 @@ class Articul(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     content = Column(String)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship("User",back_populates="articul")
-    comment = relationship("Comment", back_populates="articul") 
+    user_id = Column(Integer)
+ #   user = relationship("User",back_populates="articul")
+    #comment = relationship("Comment", back_populates="articul") 
+    def __str__(self):
+        return "name: " + self.name + " content: " + self.content + " user_id: " + str(self.user_id)
 
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
     email = Column(String(255), unique=True)
-    password_hash = Column(String(255))
-    articul = relationship("Articul", back_populates="user")
-    comment = relationship("Comment", back_populates="user")
+    password_hash = Column(String(255))  
+#    articul_id = Column(Integer, ForeignKey("articul.id"))
+ #   articul = relationship("Articul", back_populates="user")
+    #comment = relationship("Comment", back_populates="user")
+    def __str__(self):
+        return "name: " + self.name + " email: " + self.email + " pass: " + self.password_hash
 
 
     def hash_password(self, password):
@@ -36,11 +41,11 @@ class User(Base):
 class Comment(Base):
 	__tablename__ = 'comment'
 	id = Column(Integer, primary_key=True)
-	user = relationship("User", back_populates="comment")
+#	user = relationship("User", back_populates="comment")
 	user_id = Column(Integer, ForeignKey('user.id'))
 	content = Column(String)
-	articul = relationship("Articul", back_populates="comment")
-	articul_id = Column(Integer, ForeignKey('articul.id'))
+#	articul = relationship("Articul", back_populates="comment")
+#	articul_id = Column(Integer, ForeignKey('articul.id'))
 
 
 

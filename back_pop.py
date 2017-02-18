@@ -21,16 +21,33 @@ products = [
         
 ]
 
-articuls = [
 
-{'name': 'art1', 'content': 'cont1', 'user_id': '0'},
-{'name': 'art2', 'content': 'cont2', 'user_id': '0'},
-{'name': 'art3', 'content': 'cont3', 'user_id': '0'},
-{'name': 'art4', 'content': 'cont4', 'user_id': '0'},
+
+
+users = [
+
+{'id':1,'name': 'name1', 'email':'email1','password':'password1', },
+{'id':2,'name': 'name2', 'email':'email2','password':'password2', },
+{'id':3,'name': 'name3', 'email':'email3','password':'password3', },
+{'id':4,'name': 'name4', 'email':'email4','password':'password4', },
+
 ]
 
+articuls = [
+
+{'id':1 ,'name': 'art1', 'content': 'cont1', 'user_id': 1},
+{'id':2 ,'name': 'art2', 'content': 'cont2', 'user_id': 2},
+{'id':3 ,'name': 'art3', 'content': 'cont3', 'user_id': 3},
+{'id':4 ,'name': 'art4', 'content': 'cont4', 'user_id': 4},
+]
+
+for user in users:
+    newUser = User(id=user['id'], name=user["name"], email=user['email'],password_hash=user['password'])
+    session.add(newUser)
+    session.commit()
 
 for articul in articuls:
-    newArticul = Articul(name=articul["name"], content=articul['content'])
+    newArticul = Articul(name=articul["name"], content=articul['content'], user_id=articul['user_id'])
     session.add(newArticul)
     session.commit()
+
